@@ -18,7 +18,8 @@ router.post('/login', async (req, res) => {
               allowInsecureKeySizes: true,
               expiresIn: 86400
             });
-          res.cookie("token",token);
+          req.session.userId = user.id;
+          req.session.token = token;
           res.status(200).json({ message: "Login success" })
         } else {
           res.status(401).json({ msg: "Invalid credentials" })

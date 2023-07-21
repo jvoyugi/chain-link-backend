@@ -26,10 +26,10 @@ app.use(cookieParser());
 app.use(cors())
 app.use(
     cookieSession({
-        name: "session-cookie",
+        name: "token",
         secret: process.env.PRIVATE_KEY,
-        httpOnly: true,
-        secure: true
+        httpOnly: process.env.COOKIE_HTTP_ONLY ==="true",
+        secure: process.env.COOKIE_SECURE === "true"
     })
 );
 app.use('/api', routes)

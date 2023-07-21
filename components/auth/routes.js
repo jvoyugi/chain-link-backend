@@ -1,16 +1,25 @@
 let router = require('express').Router();
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt")
 let UserModel = require('../users/model');
 
-router.post('/login', function (req, res) {
+router.post('/login', async (req, res) => {
   UserModel
     .findOne({ email: req.body.email })
     .then(user => {
-      if (!user) return res.status(400).json({ msg: "User not exist" });
+      if (!user) return res.status(400).json({ msg: "User does not exist" });
       bcrypt.compare(req?.body?.password, user.password, (err, data) => {
         if (err) throw err
         if (data) {
-          res.status(200).json({ msg: "Login success" })
+          const token = jwt.sign({ id: user.id },
+            process.env.PRIVATE_KEY,
+            {
+              algorithm: 'HS256',
+              allowInsecureKeySizes: true,
+              expiresIn: 86400
+            });
+          req.session.token = token;
+          res.status(200).json({ message: "Login success" })
         } else {
           res.status(401).json({ msg: "Invalid credentials" })
         }
@@ -19,8 +28,9 @@ router.post('/login', function (req, res) {
     });
 });
 
-router.post('/logout', function (req, res) {
-  res.json({ message: "Logout" });
+router.post('/logout', async (req, res) => {
+  req.session = null;
+  res.json({ message: "Logout success" });
 });
 
 module.exports = router;

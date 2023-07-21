@@ -1,56 +1,25 @@
-let router = require('express').Router();
-let validator = require('validator');
-const bcrypt = require("bcrypt")
-let UserModel = require('./model');
+const router = require('express').Router();
+const verifyToken = require('../../middlewares/verifyToken');
+const controller = require("./controller");
 
-
-router.get('/', function (req, res) {
-  UserModel
-    .find()
-    .then(users => res.status(200).json(users))
-    .catch(err => res.status(404).json({ error: "No users found" }));
+router.get('/', async (req, res) => {
+  verifyToken(req, res, controller.getAll);
 });
 
-router.get('/:id', function (req, res) {
-  UserModel
-    .findOne({ _id: req.params.id })
-    .then(user => res.status(200).json(user))
-    .catch(err => res.status(404).json({ error: "Not Found" }));
+router.get('/:id', async (req, res) => {
+  verifyToken(req, res, controller.getById);
 });
 
-router.post('/', function (req, res) {
-  let user = req.body;
-  if (validator.isStrongPassword(user?.password)) {
-    bcrypt.hash(user.password, 10)
-      .then(hash => {
-        user.password = hash;
-        let userModel = new UserModel(user);
-        userModel.save()
-          .then((doc) => {
-            res.status(201).json(doc);
-          })
-          .catch((err) => {
-            res.status(400).json(err);
-          });
-      })
-      .catch(err => {
-        res.status(400).json(err);
-      })
-  }
+router.post('/', async (req, res) => {
+  controller.createUser(req, res);
 });
 
-router.delete('/:id', function (req, res) {
-  UserModel
-    .findByIdAndDelete({ _id: req.params.id })
-    .then(user => res.status(200).json(user))
-    .catch(err => res.status(404).json({ error: "Not Found" }));
-}
-);
-
-router.patch('/:id', function (req, res) {
-  let user = req.body;
-  UserModel.findByIdAndUpdate({ _id: req.params.id }, user, { new: true })
-    .then(updatedUser => res.status(200).json(updatedUser))
-    .catch(err => res.status(404).json({ error: "Not Found" }));
+router.delete('/:id', async (req, res) => {
+  verifyToken(req, res, controller.deleteUser);
 });
+
+router.patch('/:id', async (req, res) => {
+  verifyToken(req, res, controller.updateUser);
+});
+
 module.exports = router;

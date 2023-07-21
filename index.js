@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 const cors = require('cors')
 require('dotenv').config();
 const routes = require('./routes/routes');
@@ -21,13 +22,14 @@ database.once('connected', () => {
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors())
 app.use(
     cookieSession({
-        name: "session-cookie",
+        name: "token",
         secret: process.env.PRIVATE_KEY,
-        httpOnly: true,
-        secure: true
+        httpOnly: process.env.COOKIE_HTTP_ONLY ==="true",
+        secure: process.env.COOKIE_SECURE === "true"
     })
 );
 app.use('/api', routes)

@@ -27,7 +27,6 @@ app.use(cors())
 app.use(
     cookieSession({
         name: "session-cookie",
-        secureProxy: process.env.SECURE_PROXY ==="true",
         secret: process.env.PRIVATE_KEY,
         httpOnly: process.env.COOKIE_HTTP_ONLY ==="true",
         secure: process.env.COOKIE_SECURE === "true"

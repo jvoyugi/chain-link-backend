@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = async (req, res, next) => {
-  let token = req.session.token;
+  let token = req.cookies.token;
   if (!token) {
     return res.status(403).send({
       message: "No authorization token provided!",

@@ -35,7 +35,8 @@ app.use(
         secret: process.env.PRIVATE_KEY,
         httpOnly: process.env.COOKIE_HTTP_ONLY === "true",
         secure: process.env.COOKIE_SECURE === "true",
-        sameSite: "lax"
+        sameSite: "lax",
+        domain: process.env.CLIENT_URL
     })
 );
 app.use('/api', routes)

@@ -27,7 +27,7 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,DELETE,PATCH",
     credentials: true,
-    maxAge: 3600,
+    maxAge: 3600
 }))
 app.use(
     cookieSession({

@@ -19,6 +19,8 @@ let userSchema = new mongoose.Schema({
     required: true,
     validate: value => { return validator.isMobilePhone(value); }
   },
-  password: String
+  password: {
+    type: String
+  }
 });
 module.exports = mongoose.model('User', userSchema);

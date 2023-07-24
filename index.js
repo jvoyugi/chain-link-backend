@@ -28,7 +28,7 @@ app.use(
     cookieSession({
         name: "session-cookie",
         secret: process.env.PRIVATE_KEY,
-        httpOnly: process.env.COOKIE_HTTP_ONLY ==="true",
+        httpOnly: process.env.COOKIE_HTTP_ONLY === "true",
         secure: process.env.COOKIE_SECURE === "true"
     })
 );

@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   verifyToken(req, res, controller.getAll);
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/me', async (req, res) => {
   verifyToken(req, res, controller.getById);
 });
 
@@ -14,11 +14,11 @@ router.post('/', async (req, res) => {
   controller.createUser(req, res);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/me', async (req, res) => {
   verifyToken(req, res, controller.deleteUser);
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/me', async (req, res) => {
   verifyToken(req, res, controller.updateUser);
 });
 

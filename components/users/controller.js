@@ -13,7 +13,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
   UserModel
-    .findById(req.params.id)
+    .findById(req.session.userId)
     .then(user => res.status(200).json(user))
     .catch(err => res.status(404).json({ error: "Not Found" }));
 };
@@ -41,14 +41,14 @@ exports.createUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   UserModel
-    .findByIdAndDelete(req.params.id)
+    .findByIdAndDelete(req.session.userId)
     .then(user => res.status(200).json(user))
     .catch(err => res.status(404).json({ error: "Not Found" }));
 };
 
 exports.updateUser = async (req, res) => {
   let user = req.body;
-  UserModel.findByIdAndUpdate(req.params.id, user, { new: true })
+  UserModel.findByIdAndUpdate(req.session.userId, user, { new: true })
     .then(updatedUser => res.status(200).json(updatedUser))
     .catch(err => res.status(404).json({ error: "Not Found" }));
 };

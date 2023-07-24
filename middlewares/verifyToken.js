@@ -13,12 +13,11 @@ const verifyToken = async (req, res, next) => {
     (err, decoded) => {
       if (err) {
         return res.status(401).send({
-          message: "Unauthorized!",
+          message: "Unauthorized!"
         });
       }
-      userId === decoded.id ? next(req, res) : res.status(401).send({
-        message: "Unauthorized!",
-      });
+      userId === decoded.id ? next(req, res) :
+        res.status(401).send({ message: "Unauthorized!" });
     });
 };
 module.exports = verifyToken;

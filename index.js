@@ -38,7 +38,8 @@ app.use(
         httpOnly: true,
         domain: process.env.COOKIE_DOMAIN || "localhost",
         sameSite: 'none',
-        maxAge: 86400
+        maxAge: 86400,
+        secureProxy:true
     })
 );
 app.use('/api', routes)

@@ -12,11 +12,11 @@ router.post('/login', async (req, res) => {
         if (err) throw err
         if (data) {
           req.session.userId = user.id;
+          console.log(user.id);
           res.status(200).json({ message: "Login success" })
         } else {
           res.status(401).json({ msg: "Invalid credentials" })
         }
-
       })
     });
 });

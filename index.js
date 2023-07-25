@@ -33,9 +33,10 @@ app.use(
     cookieSession({
         name: "session-cookie",
         secret: process.env.PRIVATE_KEY,
-        httpOnly: process.env.COOKIE_HTTP_ONLY === "true",
-        secure: process.env.COOKIE_SECURE === "true",
-        sameSite: "none"
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        domain: process.env.COOKIE_DOMAIN || "localhost",
+        sameSite: 'none'
     })
 );
 app.use('/api', routes)

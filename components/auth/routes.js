@@ -11,11 +11,11 @@ router.post('/login', async (req, res) => {
       bcrypt.compare(req?.body?.password, user.password, (err, data) => {
         if (err) throw err
         if (data) {
-          const token = jwt.sign({ id: user.id },
+          const token = jwt.sign({ id: user.id, iat: Date.now() },
             process.env.PRIVATE_KEY,
             {
               algorithm: 'HS256',
-              allowInsecureKeySizes: true,
+              allowInsecureKeySizes: false,
               expiresIn: "3d"
             });
           req.session.userId = user.id;

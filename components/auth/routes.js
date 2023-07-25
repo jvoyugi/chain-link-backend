@@ -14,8 +14,6 @@ router.post('/login', async (req, res) => {
           const token = jwt.sign({userId: user._id},
             process.env.PRIVATE_KEY,
             {
-              algorithm: 'HS256',
-              allowInsecureKeySizes: true,
               expiresIn: 86400
             });
 

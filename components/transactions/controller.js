@@ -37,7 +37,7 @@ exports.deleteTransaction = async (req, res) => {
 
 exports.updateTransaction = async (req, res) => {
   let transaction = req.body;
-  UserModel.findByIdAndUpdate(req.params.id, transaction, { new: true })
+  TransactionModel.findByIdAndUpdate(req.params.id, transaction, { new: true })
     .then(updatedTransaction => res.status(200).json(updatedTransaction))
     .catch(err => res.status(404).json({ error: "Not Found" }));
 };

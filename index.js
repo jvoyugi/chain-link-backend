@@ -37,7 +37,7 @@ app.use(
         httpOnly: true,
         sameSite: 'none',
         maxAge: 86400,
-        secure: true,
+        secureProxy: true
     })
 );
 app.use('/api', routes)

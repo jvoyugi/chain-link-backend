@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
       bcrypt.compare(req?.body?.password, user.password, (err, data) => {
         if (err) throw err
         if (data) {
-          const token = jwt.sign(user.id,
+          const token = jwt.sign({userId: user._id},
             process.env.PRIVATE_KEY,
             {
               algorithm: 'HS256',

@@ -27,7 +27,7 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,DELETE,PATCH",
     credentials: true,
-    maxAge: 3600,
+    maxAge: 86400,
     exposedHeaders: "Set-Cookie"
 }))
 app.use(
@@ -37,7 +37,8 @@ app.use(
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
         domain: process.env.COOKIE_DOMAIN || "localhost",
-        sameSite: 'none'
+        sameSite: 'none',
+        maxAge: 86400
     })
 );
 app.use('/api', routes)

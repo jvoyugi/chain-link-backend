@@ -16,7 +16,7 @@ router.post('/login', async (req, res) => {
             {
               algorithm: 'HS256',
               allowInsecureKeySizes: false,
-              expiresIn: "1d"
+              expiresIn: 60*60*24
             });
 
           req.session.userId = user.id;

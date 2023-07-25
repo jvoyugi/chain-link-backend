@@ -11,9 +11,6 @@ router.post('/login', async (req, res) => {
       bcrypt.compare(req?.body?.password, user.password, (err, data) => {
         if (err) throw err
         if (data) {
-          const token = jwt.sign({ userId: user._id, exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) },
-            process.env.PRIVATE_KEY);
-
           req.session.userId = user.id;
           req.session.token = token;
           res.status(200).json({ message: "Login success" })

@@ -11,15 +11,15 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  verifyToken(req, res, controller.createBusiness);
+  verifyToken(req, res, controller.createTransaction);
 });
 
 router.delete('/:id', async (req, res) => {
-  verifyToken(req, res, controller.deleteBusiness);
+  verifyToken(req, res, controller.deleteTransaction);
 });
 
-router.patch('/:id', async (req, res) => {
-  verifyToken(req, res, controller.updateBusiness);
+router.patch('/id', async (req, res) => {
+  verifyToken(req, res, controller.updateTransaction);
 });
 
 module.exports = router;

@@ -36,7 +36,7 @@ app.use(
         secret: process.env.PRIVATE_KEY,
         httpOnly: true,
         sameSite: 'none',
-        maxAge: 86400,
+        maxAge: 86400000,
         secureProxy: true
     })
 );

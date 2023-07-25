@@ -1,7 +1,7 @@
 const TransactionModel = require('./model');
 
 exports.getAll = async (req, res) => {
-  TransactionSchema
+  TransactionModel
     .find()
     .then(transactions => res.status(200).json(transactions))
     .catch(err => {
@@ -10,7 +10,7 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getById = async (req, res) => {
-  UserModel
+  TransactionModel
     .findById(req.params.id)
     .then(transaction => res.status(200).json(transaction))
     .catch(err => res.status(404).json({ error: "Not Found" }));
@@ -18,7 +18,7 @@ exports.getById = async (req, res) => {
 
 exports.createTransaction = async (req, res) => {
   let transaction = req.body;
-  let transactionModel = new UserModel(transaction);
+  let transactionModel = new TransactionModel(transaction);
   transactionModel.save()
     .then((transaction) => {
       res.status(201).json(transaction);

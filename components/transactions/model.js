@@ -5,9 +5,7 @@ let validator = require('validator');
 let transactionSchema = new mongoose.Schema({
   description: {
     type: String,
-    required: true,
-    unique: true,
-    lowercase: true
+    required: true
   },
   amount: {
     type: Number,
@@ -16,6 +14,10 @@ let transactionSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
+  },
+  businessName:{
+      type: String,
+      required: true,
   }
 });
 module.exports = mongoose.model('Transaction', transactionSchema);

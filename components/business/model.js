@@ -1,13 +1,12 @@
 let mongoose = require("mongoose");
 
 let businessSchema = new mongoose.Schema({
-  business: {
+  businessName: {
     type: String,
     required: true,
-    unique: true,
-    lowercase: true
+    unique: true
   },
-  account_number: {
+  accountNumber: {
     type: String,
     required: true
   },
@@ -19,11 +18,11 @@ let businessSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date_added: {
+  dateAdded: {
     type: Date,
     required: true
   },
-  date_edited: {
+  dateEdited: {
     type: Date,
     required: true
   }

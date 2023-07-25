@@ -18,7 +18,7 @@ router.delete('/:id', async (req, res) => {
   verifyToken(req, res, controller.deleteBusiness);
 });
 
-router.patch('/id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   verifyToken(req, res, controller.updateBusiness);
 });
 

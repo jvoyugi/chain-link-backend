@@ -1,25 +1,26 @@
 const BusinessModel = require('./model');
 
 exports.getAll = async (req, res) => {
-  BusinessSchema
+  BusinessModel
     .find()
     .then(businesses => res.status(200).json(businesses))
     .catch(err => {
-      res.status(404).json({ error: "No businesses found" });
+      res.status(404).json([]);
     });
 };
 
 exports.getById = async (req, res) => {
-  UserModel
+  BusinessModel
     .findById(req.params.id)
     .then(business => res.status(200).json(business))
     .catch(err => res.status(404).json({ error: "Not Found" }));
 };
 
 exports.createBusiness = async (req, res) => {
-  let business = req.body;
-  let BusinessModel = new UserModel(business);
-  BusinessModel.save()
+  let businessModel = new BusinessModel(req.body);
+  businessModel.dateAdded = new Date();
+  businessModel.dateEdited = new Date();
+  businessModel.save()
     .then((business) => {
       res.status(201).json(business);
     })
@@ -37,7 +38,8 @@ exports.deleteBusiness = async (req, res) => {
 
 exports.updateBusiness = async (req, res) => {
   let business = req.body;
-  TransactionModel.findByIdAndUpdate(req.params.id, business, { new: true })
+  business.dateEdited=new Date();
+  BusinessModel.findByIdAndUpdate(req.params.id, business, { new: true })
     .then(updatedBusiness => res.status(200).json(updatedBusiness))
     .catch(err => res.status(404).json({ error: "Not Found" }));
 };

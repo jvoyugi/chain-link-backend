@@ -1,5 +1,5 @@
 const validator = require('validator');
-const TransactionModel = require('./model');
+const UserModel = require('./model');
 
 exports.getAll = async (req, res) => {
   UserModel

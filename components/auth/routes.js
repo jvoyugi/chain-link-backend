@@ -16,9 +16,9 @@ router.post('/login', async (req, res) => {
             {
               algorithm: 'HS256',
               allowInsecureKeySizes: false,
-              expiresIn: "1d",
-              mutatePayload: true
+              expiresIn: "1d"
             });
+
           req.session.userId = user.id;
           req.session.token = token;
           res.status(200).json({ message: "Login success" })

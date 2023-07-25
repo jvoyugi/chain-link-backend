@@ -37,7 +37,7 @@ app.use(
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
         domain: process.env.COOKIE_DOMAIN || "localhost",
-        sameSite: 'lax'
+        sameSite: 'none'
     })
 );
 app.use('/api', routes)

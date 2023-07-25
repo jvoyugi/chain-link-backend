@@ -13,7 +13,7 @@ const verifyToken = async (req, res, next) => {
     (err, decoded) => {
       if (err) {
         return res.status(401).send({
-          message: "Unauthorized!"
+          message: "Unauthorized! Decode failed"
         });
       }
       userId === decoded.id ? next(req, res) :

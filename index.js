@@ -35,7 +35,6 @@ app.use(
         name: "session-cookie",
         secret: process.env.PRIVATE_KEY,
         httpOnly: true,
-        domain: process.env.COOKIE_DOMAIN || "localhost",
         sameSite: 'none',
         maxAge: 86400,
         secureProxy:true

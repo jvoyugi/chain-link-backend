@@ -1,6 +1,6 @@
 const validator = require('validator');
 const bcrypt = require("bcrypt")
-const TransactionModel = require('./model');
+const TransactionModel = require('./../transactions/model');
 
 
 exports.getSales = async (req, res) => {

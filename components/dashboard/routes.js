@@ -5,6 +5,9 @@ const controller = require("./controller");
 router.get('/sales', async (req, res) => {
     verifyToken(req, res, controller.getSales);
 });
+router.get('/sales/summary', async (req, res) => {
+    verifyToken(req, res, controller.getPerBusinessSales);
+});
 router.get('/moneyOut', async (req, res) => {
     verifyToken(req, res, controller.getMoneyOut);
 });

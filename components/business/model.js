@@ -1,4 +1,5 @@
 let mongoose = require("mongoose");
+const Schema = mongoose.Schema
 
 let businessSchema = new mongoose.Schema({
   businessName: {
@@ -25,6 +26,11 @@ let businessSchema = new mongoose.Schema({
   dateEdited: {
     type: Date,
     required: true
+  },
+  addedBy: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'users'
   }
 });
 module.exports = mongoose.model('Business', businessSchema);

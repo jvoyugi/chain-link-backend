@@ -2,7 +2,7 @@ const BusinessModel = require('./model');
 
 exports.getAll = async (req, res) => {
   BusinessModel
-    .find()
+    .find({addedBy:req.session.userId})
     .then(businesses => res.status(200).json(businesses))
     .catch(err => {
       res.status(404).json([]);
@@ -20,6 +20,7 @@ exports.createBusiness = async (req, res) => {
   let businessModel = new BusinessModel(req.body);
   businessModel.dateAdded = new Date();
   businessModel.dateEdited = new Date();
+  businessModel.addedBy=req.session.userId;
   businessModel.save()
     .then((business) => {
       res.status(201).json(business);

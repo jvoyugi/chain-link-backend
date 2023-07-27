@@ -12,4 +12,8 @@ router.get('/debts', async (req, res) => {
     verifyToken(req, res, controller.getDebts);
 });
 
+router.get('/recent', async (req, res) => {
+    verifyToken(req, res, controller.getRecent);
+});
+
 module.exports = router;

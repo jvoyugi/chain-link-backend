@@ -4,8 +4,7 @@ const Schema = mongoose.Schema
 let businessSchema = new mongoose.Schema({
   businessName: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   accountNumber: {
     type: String,
